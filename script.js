@@ -248,3 +248,154 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', createSparkles);
 
 console.log('🚀 BNBPay animations loaded! Enjoy the yellow glow ✨');
+
+// ============================================
+// DASHBOARD DATA MANAGEMENT
+// ============================================
+
+// Mock data structure - Easy to replace with RPC data
+// When integrating with RPC, replace this object with API calls
+const dashboardData = {
+    '24h': {
+        totalTransactions: '24,567',
+        totalVolume: '$1.2M',
+        activeAddresses: '8,234',
+        api402Requests: '3,456',
+        subscriptions: '1,892',
+        avgTransaction: '$48.76',
+        periodLabel: '(24h)'
+    },
+    '7d': {
+        totalTransactions: '156,890',
+        totalVolume: '$7.8M',
+        activeAddresses: '45,123',
+        api402Requests: '21,340',
+        subscriptions: '1,892',
+        avgTransaction: '$49.68',
+        periodLabel: '(7d)'
+    },
+    '30d': {
+        totalTransactions: '634,512',
+        totalVolume: '$31.2M',
+        activeAddresses: '178,456',
+        api402Requests: '89,234',
+        subscriptions: '1,892',
+        avgTransaction: '$49.16',
+        periodLabel: '(30d)'
+    },
+    'all': {
+        totalTransactions: '2,456,789',
+        totalVolume: '$124.5M',
+        activeAddresses: '567,890',
+        api402Requests: '345,678',
+        subscriptions: '1,892',
+        avgTransaction: '$50.68',
+        periodLabel: '(All Time)'
+    }
+};
+
+// Time period filter functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const timeFilterButtons = document.querySelectorAll('.time-filter-btn');
+
+    if (timeFilterButtons.length > 0) {
+        timeFilterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const period = this.dataset.period;
+
+                // Update button styles
+                timeFilterButtons.forEach(btn => {
+                    btn.classList.remove('bg-bnb-yellow', 'text-bnb-dark');
+                    btn.classList.add('bg-bnb-gray', 'text-gray-300');
+                });
+                this.classList.remove('bg-bnb-gray', 'text-gray-300');
+                this.classList.add('bg-bnb-yellow', 'text-bnb-dark');
+
+                // Update dashboard stats
+                updateDashboardStats(period);
+            });
+        });
+    }
+});
+
+// Function to update dashboard statistics
+function updateDashboardStats(period) {
+    const data = dashboardData[period];
+
+    if (!data) return;
+
+    // Animate stat changes
+    const stats = [
+        { id: 'stat-total-txns', value: data.totalTransactions },
+        { id: 'stat-total-volume', value: data.totalVolume },
+        { id: 'stat-active-addresses', value: data.activeAddresses },
+        { id: 'stat-402pay', value: data.api402Requests },
+        { id: 'stat-subscriptions', value: data.subscriptions },
+        { id: 'stat-avg-tx', value: data.avgTransaction }
+    ];
+
+    stats.forEach(stat => {
+        const element = document.getElementById(stat.id);
+        if (element) {
+            // Add flash animation
+            element.style.transition = 'all 0.3s ease';
+            element.style.transform = 'scale(1.1)';
+            element.style.color = '#F0B90B';
+
+            setTimeout(() => {
+                element.textContent = stat.value;
+                element.style.transform = 'scale(1)';
+            }, 150);
+        }
+    });
+
+    // Update labels
+    const volumeLabel = document.getElementById('stat-volume-label');
+    const addressesLabel = document.getElementById('stat-addresses-label');
+
+    if (volumeLabel) {
+        volumeLabel.textContent = `Total Volume ${data.periodLabel}`;
+    }
+    if (addressesLabel) {
+        addressesLabel.textContent = `Active Addresses ${data.periodLabel}`;
+    }
+}
+
+// ============================================
+// INTEGRATING WITH RPC - INSTRUCTIONS
+// ============================================
+/*
+To integrate with your RPC URL, replace the dashboardData object with API calls.
+
+Example integration:
+
+async function fetchDashboardData(period) {
+    const RPC_URL = 'YOUR_RPC_URL_HERE';
+
+    try {
+        const response = await fetch(`${RPC_URL}/api/stats?period=${period}`);
+        const data = await response.json();
+
+        return {
+            totalTransactions: data.txCount.toLocaleString(),
+            totalVolume: `$${(data.volume / 1000000).toFixed(1)}M`,
+            activeAddresses: data.activeAddresses.toLocaleString(),
+            api402Requests: data.api402Count.toLocaleString(),
+            subscriptions: data.subscriptionCount.toLocaleString(),
+            avgTransaction: `$${data.avgTxAmount.toFixed(2)}`,
+            periodLabel: `(${period})`
+        };
+    } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        return null;
+    }
+}
+
+// Then modify the updateDashboardStats function:
+async function updateDashboardStats(period) {
+    const data = await fetchDashboardData(period);
+    if (!data) return;
+
+    // Rest of the update logic remains the same...
+}
+*/
