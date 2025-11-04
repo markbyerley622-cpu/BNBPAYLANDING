@@ -292,6 +292,35 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Header Logo Responsive Sizing */
+nav img {
+    transition: all 0.3s ease;
+    max-height: 56px; /* md:h-14 */
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    nav img {
+        max-height: 48px; /* h-12 */
+    }
+}
+
+@media (max-width: 480px) {
+    nav img {
+        max-height: 40px; /* Smaller for mobile */
+    }
+}
+
+/* Footer Logo Sizing */
+footer img {
+    max-height: 40px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
 /* Mobile Responsiveness for Partner Logos */
 @media (max-width: 768px) {
     .partner-logo {
@@ -316,5 +345,9 @@ html {
 
     .partner-card {
         padding: 20px 30px;
+    }
+
+    footer img {
+        max-height: 32px;
     }
 }
