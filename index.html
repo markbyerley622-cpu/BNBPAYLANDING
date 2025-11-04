@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open standard and reference SDKs for instant, low-fee payments on BNB Chain with first-class Subscriptions, 402Pay, and Model Context Protocol support.">
+    <title>BNBPay - Open Standard for Decentralized Payments on BNB Chain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bnb-yellow': '#F0B90B',
+                        'bnb-dark': '#0B0E11',
+                        'bnb-gray': '#1E2329',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-bnb-dark text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-bnb-dark/95 backdrop-blur-sm border-b border-bnb-gray z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="bnblogo.png" alt="BNB" class="h-10 w-10">
+                    <span class="text-2xl font-bold">BNBPay</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-bnb-yellow transition">Features</a>
+                    <a href="#use-cases" class="text-gray-300 hover:text-bnb-yellow transition">Use Cases</a>
+                    <a href="#developers" class="text-gray-300 hover:text-bnb-yellow transition">Developers</a>
+                    <a href="#networks" class="text-gray-300 hover:text-bnb-yellow transition">Networks</a>
+                    <a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="text-gray-300 hover:text-bnb-yellow transition">GitHub</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center space-x-4">
+                    <a href="#get-started" class="bg-bnb-yellow text-bnb-dark px-6 py-2.5 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-block mb-6">
+                    <span class="bg-bnb-gray text-bnb-yellow px-4 py-2 rounded-full text-sm font-semibold">
+                        Open Standard for BNB Chain Payments
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Decentralized payments,
+                    <span class="text-bnb-yellow">rewritten</span>
+                </h1>
+                <p class="text-xl text-gray-400 mb-10 leading-relaxed">
+                    An open standard and reference SDKs for instant, low-fee payments on BNB Chain, with first-class Subscriptions, 402Pay (HTTP-native payments), and Model Context Protocol (MCP) support.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#get-started" class="bg-bnb-yellow text-bnb-dark px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-500 transition glow-effect">
+                        Start Building
+                    </a>
+                    <a href="#documentation" class="bg-bnb-gray text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-700 transition border border-gray-600">
+                        Read Documentation
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-bnb-yellow">$0.001</div>
+                        <div class="text-sm text-gray-400 mt-2">Gas on opBNB</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-bnb-yellow">&lt;3s</div>
+                        <div class="text-sm text-gray-400 mt-2">Confirmation Time</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-bnb-yellow">100%</div>
+                        <div class="text-sm text-gray-400 mt-2">Open Source</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 lg:px-8 bg-bnb-gray/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Why BNBPay?</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Built for developers, designed for scale</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Card 1 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fast & Low-Fee</h3>
+                    <p class="text-gray-400">Seconds-level confirmations on BNB Chain with low transaction costs. Deploy on opBNB for micropayments at $0.001 gas.</p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Open & Wallet-Agnostic</h3>
+                    <p class="text-gray-400">Works with any EVM wallet through WalletConnect 2.0 or injected providers. No lock-in, fully decentralized.</p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Verifiable</h3>
+                    <p class="text-gray-400">On-chain receipts with optional helper contracts that emit canonical PaymentReference events for full transparency.</p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI-Native</h3>
+                    <p class="text-gray-400">402Pay integration enables HTTP-native micropayments for AI agents and APIs. Built-in MCP tools for agentic commerce.</p>
+                </div>
+
+                <!-- Feature Card 5 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Beyond One-Offs</h3>
+                    <p class="text-gray-400">Built-in Subscriptions with pull billing model. Perfect for SaaS, memberships, and recurring payments on-chain.</p>
+                </div>
+
+                <!-- Feature Card 6 -->
+                <div class="bg-bnb-dark border border-bnb-gray p-8 rounded-2xl hover-lift scroll-fade-in">
+                    <div class="w-14 h-14 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Multi-Chain Ready</h3>
+                    <p class="text-gray-400">Deploy on opBNB for ultra-low-cost micropayments or BNB Chain for maximum security. Production-ready pathway via Pepay Labs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="py-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Built for Everyone</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">From merchants to AI agents</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Use Case 1 -->
+                <div class="bg-gradient-to-br from-bnb-gray to-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl scroll-fade-in hover-lift">
+                    <h3 class="text-2xl font-bold mb-4 text-bnb-yellow">E-commerce & POS</h3>
+                    <p class="text-gray-400 mb-6">Accept crypto payments in-store or online with QR codes, web checkout, or mobile SDKs. Real-time confirmations with low fees.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Web POS reference app included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Support for BNB, USDT, USDC, FDUSD, and custom tokens</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">On-chain receipt verification</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Use Case 2 -->
+                <div class="bg-gradient-to-br from-bnb-gray to-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl scroll-fade-in hover-lift">
+                    <h3 class="text-2xl font-bold mb-4 text-bnb-yellow">SaaS & Subscriptions</h3>
+                    <p class="text-gray-400 mb-6">Implement recurring billing with on-chain subscriptions. Pull payments, auto-renewals, and usage-based pricing.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Native subscription contracts</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">User-controlled cancellation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Flexible billing intervals</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Use Case 3 -->
+                <div class="bg-gradient-to-br from-bnb-gray to-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl scroll-fade-in hover-lift">
+                    <h3 class="text-2xl font-bold mb-4 text-bnb-yellow">AI Agents & APIs</h3>
+                    <p class="text-gray-400 mb-6">Enable AI agents to make autonomous payments via 402Pay and MCP. Perfect for API monetization and agent-to-agent commerce.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">HTTP-native micropayments</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Model Context Protocol (MCP) server</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Pay-per-call API monetization</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Use Case 4 -->
+                <div class="bg-gradient-to-br from-bnb-gray to-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl scroll-fade-in hover-lift">
+                    <h3 class="text-2xl font-bold mb-4 text-bnb-yellow">Content Creators</h3>
+                    <p class="text-gray-400 mb-6">Monetize content with tips, memberships, or pay-per-view. Direct payments from fans to creators without intermediaries.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">No platform fees</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Instant settlement</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Global reach</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="py-20 px-6 lg:px-8 bg-bnb-gray/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Developer-First</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Simple SDKs, clear docs, production-ready</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-bnb-dark border border-bnb-yellow/30 p-6 rounded-xl text-center">
+                    <div class="text-4xl font-bold text-bnb-yellow mb-2">3</div>
+                    <div class="text-gray-400">Official SDKs</div>
+                    <div class="text-sm text-gray-500 mt-1">JS/TS, Solidity, MCP</div>
+                </div>
+                <div class="bg-bnb-dark border border-bnb-yellow/30 p-6 rounded-xl text-center">
+                    <div class="text-4xl font-bold text-bnb-yellow mb-2">5min</div>
+                    <div class="text-gray-400">Integration Time</div>
+                    <div class="text-sm text-gray-500 mt-1">From docs to live</div>
+                </div>
+                <div class="bg-bnb-dark border border-bnb-yellow/30 p-6 rounded-xl text-center">
+                    <div class="text-4xl font-bold text-bnb-yellow mb-2">MIT</div>
+                    <div class="text-gray-400">License</div>
+                    <div class="text-sm text-gray-500 mt-1">Fully open source</div>
+                </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="bg-bnb-dark border border-bnb-yellow/20 rounded-2xl p-8 max-w-4xl mx-auto scroll-fade-in">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold">Quick Start Example</h3>
+                    <span class="text-sm text-gray-400">JavaScript/TypeScript</span>
+                </div>
+                <pre class="bg-black/50 p-6 rounded-xl overflow-x-auto text-sm">
+<code class="text-gray-300"><span class="text-purple-400">import</span> { <span class="text-blue-400">createPaymentRequest</span>, <span class="text-blue-400">verifyPayment</span> } <span class="text-purple-400">from</span> <span class="text-green-400">"@bnbpay/sdk"</span>;
+
+<span class="text-gray-500">// Create a payment request</span>
+<span class="text-purple-400">const</span> request = <span class="text-blue-400">createPaymentRequest</span>({
+  <span class="text-blue-400">chainId</span>: <span class="text-orange-400">56</span>,
+  <span class="text-blue-400">recipient</span>: <span class="text-green-400">"0xMerchantAddress"</span>,
+  <span class="text-blue-400">amount</span>: <span class="text-green-400">"10.00"</span>,
+  <span class="text-blue-400">currency</span>: <span class="text-green-400">"USD"</span>,
+  <span class="text-blue-400">token</span>: <span class="text-green-400">"0x55d398326f99059fF775485246999027B3197955"</span>, <span class="text-gray-500">// USDT</span>
+  <span class="text-blue-400">referenceId</span>: <span class="text-green-400">"order_12345"</span>
+});
+
+<span class="text-gray-500">// Generate payment URI and QR code</span>
+<span class="text-purple-400">const</span> paymentURI = request.<span class="text-blue-400">toURI</span>();
+<span class="text-purple-400">const</span> qrCode = request.<span class="text-blue-400">toQR</span>();</code></pre>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="bg-bnb-yellow text-bnb-dark px-5 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        View Full Docs
+                    </a>
+                    <a href="https://github.com/PepayLabs/bnb-pay/tree/main/examples" target="_blank" class="border border-bnb-yellow text-bnb-yellow px-5 py-2 rounded-lg font-semibold hover:bg-bnb-yellow hover:text-bnb-dark transition">
+                        See Examples
+                    </a>
+                    <a href="https://github.com/PepayLabs/bnb-pay/tree/main/packages/sdk-js" target="_blank" class="border border-gray-600 text-gray-300 px-5 py-2 rounded-lg font-semibold hover:border-bnb-yellow hover:text-bnb-yellow transition">
+                        SDK Reference
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Chain Strategy Section -->
+    <section class="py-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Multi-Chain Strategy</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Deploy on the right chain for your use case</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- opBNB Card -->
+                    <div class="bg-gradient-to-br from-bnb-yellow/20 to-bnb-dark border border-bnb-yellow p-8 rounded-2xl scroll-fade-in hover-lift">
+                        <h3 class="text-2xl font-bold mb-4 text-bnb-yellow">opBNB</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-sm text-gray-400">Use Case</div>
+                                <div class="text-lg font-semibold">Micropayments ($0.001-$1)</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Gas Cost</div>
+                                <div class="text-lg font-semibold text-bnb-yellow">~$0.001</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Confirmation</div>
+                                <div class="text-lg font-semibold">3-6 seconds</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Chain ID</div>
+                                <div class="text-lg font-semibold">204</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-sm text-gray-400">
+                            Perfect for AI agents, API payments, and high-frequency microtransactions
+                        </div>
+                    </div>
+
+                    <!-- BNB Chain Card -->
+                    <div class="bg-gradient-to-br from-bnb-gray to-bnb-dark border border-bnb-yellow/30 p-8 rounded-2xl scroll-fade-in hover-lift">
+                        <h3 class="text-2xl font-bold mb-4">BNB Chain</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-sm text-gray-400">Use Case</div>
+                                <div class="text-lg font-semibold">Standard payments ($1+)</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Gas Cost</div>
+                                <div class="text-lg font-semibold">~$0.50-$2</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Confirmation</div>
+                                <div class="text-lg font-semibold">9-36 seconds</div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Chain ID</div>
+                                <div class="text-lg font-semibold">56</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-sm text-gray-400">
+                            Maximum security for e-commerce, subscriptions, and larger transactions
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 402Pay Section -->
+    <section class="py-20 px-6 lg:px-8 bg-bnb-gray/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">402Pay Integration</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">HTTP-Native Payments for AI Agents</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl scroll-fade-in">
+                    <p class="text-lg text-gray-300 mb-8">
+                        BNBPay supports the <span class="text-bnb-yellow font-semibold">402 Payment Required</span> protocol,
+                        enabling AI agents and applications to pay for API access without accounts or API keys.
+                        Perfect for machine-to-machine micropayments.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold mb-2">Automatic Payments</h4>
+                            <p class="text-sm text-gray-400">AI agents handle payments automatically via 402 protocol</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold mb-2">Micropayments</h4>
+                            <p class="text-sm text-gray-400">Pay $0.001 per API call on opBNB Layer 2</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-bnb-yellow/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-bnb-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold mb-2">No API Keys</h4>
+                            <p class="text-sm text-gray-400">Access APIs without accounts or credentials</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCP Section -->
+    <section class="py-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Model Context Protocol</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Built for AI agents and autonomous commerce</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-bnb-yellow/10 to-bnb-dark border border-bnb-yellow/30 p-8 rounded-2xl scroll-fade-in">
+                    <p class="text-lg text-gray-300 mb-6">
+                        BNBPay exposes an MCP tool so AI agents can safely create payment links and poll status
+                        without holding private keys. Enable autonomous agent-to-agent commerce on BNB Chain.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold mb-1">Safe Payment Creation</div>
+                                <div class="text-sm text-gray-400">Agents create payment requests without private key access</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold mb-1">Status Polling</div>
+                                <div class="text-sm text-gray-400">Real-time payment verification and status updates</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold mb-1">QR & Deep Links</div>
+                                <div class="text-sm text-gray-400">Generate scannable QR codes and mobile wallet deep links</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-bnb-yellow mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold mb-1">Autonomous Commerce</div>
+                                <div class="text-sm text-gray-400">Enable agent-to-agent payments and commerce flows</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Wallets Section -->
+    <section class="py-20 px-6 lg:px-8 bg-bnb-gray/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Supported Wallets</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Wallet-agnostic and works with any EVM wallet</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-bnb-dark border border-bnb-yellow/20 p-6 rounded-xl text-center hover-lift">
+                    <div class="text-lg font-semibold mb-2">Binance Web3 Wallet</div>
+                    <div class="text-sm text-gray-400">Browser, Mobile</div>
+                </div>
+
+                <div class="bg-bnb-dark border border-bnb-yellow/20 p-6 rounded-xl text-center hover-lift">
+                    <div class="text-lg font-semibold mb-2">Trust Wallet</div>
+                    <div class="text-sm text-gray-400">iOS, Android</div>
+                </div>
+
+                <div class="bg-bnb-dark border border-bnb-yellow/20 p-6 rounded-xl text-center hover-lift">
+                    <div class="text-lg font-semibold mb-2">MetaMask</div>
+                    <div class="text-sm text-gray-400">Browser, iOS, Android</div>
+                </div>
+
+                <div class="bg-bnb-dark border border-bnb-yellow/20 p-6 rounded-xl text-center hover-lift">
+                    <div class="text-lg font-semibold mb-2">WalletConnect 2.0</div>
+                    <div class="text-sm text-gray-400">All EVM Wallets</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-gray-400">+ OKX Wallet, Rabby, and all WalletConnect-compatible wallets</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Networks & Tokens Section -->
+    <section id="networks" class="py-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Networks & Tokens</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Deploy on mainnet or testnet</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Networks -->
+                    <div class="bg-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6 text-bnb-yellow">Networks</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">BNB Chain Mainnet</span>
+                                <span class="text-bnb-yellow">Chain ID: 56</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">opBNB Mainnet</span>
+                                <span class="text-bnb-yellow">Chain ID: 204</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">BNB Testnet (Chapel)</span>
+                                <span class="text-bnb-yellow">Chain ID: 97</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supported Tokens -->
+                    <div class="bg-bnb-dark border border-bnb-yellow/20 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6 text-bnb-yellow">Supported Tokens</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">BNB</span>
+                                <span class="text-gray-400 text-sm">Native token</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">USDT</span>
+                                <span class="text-gray-400 text-sm">Tether USD</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">USDC</span>
+                                <span class="text-gray-400 text-sm">USD Coin</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                                <span class="font-semibold">FDUSD</span>
+                                <span class="text-gray-400 text-sm">First Digital USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Section -->
+    <section class="py-20 px-6 lg:px-8 bg-bnb-gray/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 scroll-fade-in">Enterprise & Managed</h2>
+                <p class="text-xl text-gray-400 mb-8 scroll-fade-in">
+                    For enterprise-grade payments, dashboards, reconciliation, and SLAs
+                </p>
+                <div class="bg-gradient-to-br from-bnb-yellow/10 to-bnb-dark border border-bnb-yellow/30 p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="text-left">
+                            <h3 class="text-2xl font-bold mb-2">Pepay Labs</h3>
+                            <p class="text-gray-400">Enterprise-ready payment and settlement stack with full support</p>
+                        </div>
+                        <a href="https://pepay.io" target="_blank" class="bg-bnb-yellow text-bnb-dark px-8 py-3 rounded-lg font-bold hover:bg-yellow-500 transition whitespace-nowrap">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-20 px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 scroll-fade-in">Ecosystem Partners</h2>
+                <p class="text-xl text-gray-400 scroll-fade-in">Built together with the BNB ecosystem</p>
+            </div>
+
+            <div class="partner-scroll-container">
+                <div class="partner-scroll-track">
+                    <!-- Partner 1 -->
+                    <div class="partner-card">
+                        <img src="bnblogo.png" alt="BNB Chain" class="partner-logo">
+                    </div>
+
+                    <!-- Partner 2 -->
+                    <div class="partner-card">
+                        <img src="pancakeswaplogo.png" alt="PancakeSwap" class="partner-logo">
+                    </div>
+
+                    <!-- Partner 3 -->
+                    <div class="partner-card">
+                        <img src="pepaylabs.png" alt="Pepay Labs" class="partner-logo">
+                    </div>
+
+                    <!-- Partner 4 -->
+                    <div class="partner-card">
+                        <img src="pieverselogo.png" alt="Pieverse" class="partner-logo">
+                    </div>
+
+                    <!-- Duplicate for seamless loop -->
+                    <div class="partner-card">
+                        <img src="bnblogo.png" alt="BNB Chain" class="partner-logo">
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="pancakeswaplogo.png" alt="PancakeSwap" class="partner-logo">
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="pepaylabs.png" alt="Pepay Labs" class="partner-logo">
+                    </div>
+
+                    <div class="partner-card">
+                        <img src="pieverselogo.png" alt="Pieverse" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="get-started" class="py-20 px-6 lg:px-8 bg-gradient-to-br from-bnb-yellow/10 to-bnb-dark">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 scroll-fade-in">Ready to build?</h2>
+            <p class="text-xl text-gray-400 mb-10 scroll-fade-in">Join the future of decentralized payments on BNB Chain</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="bg-bnb-yellow text-bnb-dark px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-500 transition glow-effect">
+                    View on GitHub
+                </a>
+                <a href="https://github.com/PepayLabs/bnb-pay/blob/main/SPEC.md" target="_blank" class="bg-bnb-gray text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-700 transition border border-gray-600">
+                    Read Specification
+                </a>
+            </div>
+
+            <div class="mt-12 text-sm text-gray-500">
+                <p>Core contracts scheduled for CertiK security audit</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-bnb-dark border-t border-bnb-gray py-12 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="bnblogo.png" alt="BNB" class="h-8 w-8">
+                        <span class="text-xl font-bold">BNBPay</span>
+                    </div>
+                    <p class="text-sm text-gray-400">Open standard for decentralized payments on BNB Chain</p>
+                </div>
+
+                <!-- Developers -->
+                <div>
+                    <h4 class="font-semibold mb-4">Developers</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="hover:text-bnb-yellow transition">Documentation</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="hover:text-bnb-yellow transition">GitHub</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay/tree/main/packages/sdk-js" target="_blank" class="hover:text-bnb-yellow transition">SDK Reference</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay/tree/main/examples" target="_blank" class="hover:text-bnb-yellow transition">Examples</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://github.com/PepayLabs/bnb-pay/blob/main/SPEC.md" target="_blank" class="hover:text-bnb-yellow transition">Specification</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay#-audits" target="_blank" class="hover:text-bnb-yellow transition">Security Audit</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay/tree/main/contracts" target="_blank" class="hover:text-bnb-yellow transition">Smart Contracts</a></li>
+                        <li><a href="https://github.com/PepayLabs/bnb-pay/tree/main/mcp" target="_blank" class="hover:text-bnb-yellow transition">MCP Server</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community -->
+                <div>
+                    <h4 class="font-semibold mb-4">Community</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-bnb-yellow transition">Twitter</a></li>
+                        <li><a href="#" class="hover:text-bnb-yellow transition">Discord</a></li>
+                        <li><a href="#" class="hover:text-bnb-yellow transition">Telegram</a></li>
+                        <li><a href="#" class="hover:text-bnb-yellow transition">Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-bnb-gray pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <div class="text-center md:text-left">
+                    <p>Built for the BNB Chain ecosystem with thanks to the BNB Foundation</p>
+                    <p class="mt-1">Maintained by <a href="https://pepay.io" target="_blank" class="text-bnb-yellow hover:underline">Pepay Labs</a></p>
+                </div>
+                <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                    <a href="https://github.com/PepayLabs/bnb-pay/blob/main/LICENSE" target="_blank" class="hover:text-bnb-yellow transition">MIT License</a>
+                    <a href="mailto:contact@pepay.io" class="hover:text-bnb-yellow transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

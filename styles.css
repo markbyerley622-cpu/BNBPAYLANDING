@@ -1,0 +1,320 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Glow Effects */
+.glow-effect {
+    box-shadow: 0 0 40px rgba(240, 185, 11, 0.3);
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 40px rgba(240, 185, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(240, 185, 11, 0.5);
+    }
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(240, 185, 11, 0.3);
+}
+
+/* Partner Scroll Container */
+.partner-scroll-container {
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.partner-scroll-container::before,
+.partner-scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.partner-scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, #0B0E11, transparent);
+}
+
+.partner-scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, #0B0E11, transparent);
+}
+
+/* Partner Scroll Track - Continuous Animation */
+.partner-scroll-track {
+    display: flex;
+    gap: 40px;
+    animation: scroll-left 30s linear infinite;
+    will-change: transform;
+}
+
+.partner-scroll-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50%));
+    }
+}
+
+/* Partner Cards */
+.partner-card {
+    flex-shrink: 0;
+    background: rgba(30, 35, 41, 0.3);
+    border: 2px solid transparent;
+    padding: 40px 60px;
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(240, 185, 11, 0.3), rgba(240, 185, 11, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.partner-card:hover {
+    background: rgba(30, 35, 41, 0.6);
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(240, 185, 11, 0.2);
+}
+
+.partner-card:hover::before {
+    opacity: 1;
+}
+
+/* Partner Logos - Bigger and Rounded */
+.partner-logo {
+    height: 120px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.partner-card:hover .partner-logo {
+    filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 20px rgba(240, 185, 11, 0.4));
+    transform: scale(1.08);
+}
+
+/* Scroll Fade In Animation */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Yellow Floating Particles Background */
+.floating-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(240, 185, 11, 0.3), transparent);
+    border-radius: 50%;
+    animation: float-particle linear infinite;
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Stat Cards with Yellow Glow */
+.stat-card {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(240, 185, 11, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+/* Section Highlight on Scroll */
+section {
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+section.in-view {
+    animation: section-highlight 1s ease-out;
+}
+
+@keyframes section-highlight {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+/* Navbar Scroll Effect */
+nav {
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(11, 14, 17, 0.98) !important;
+    box-shadow: 0 4px 20px rgba(240, 185, 11, 0.1);
+}
+
+/* Hero Text Animation */
+@keyframes text-glow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(240, 185, 11, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(240, 185, 11, 0.6);
+    }
+}
+
+h1 .text-bnb-yellow {
+    animation: text-glow 3s ease-in-out infinite;
+}
+
+/* Button Glow Animation */
+a.bg-bnb-yellow {
+    position: relative;
+    overflow: hidden;
+}
+
+a.bg-bnb-yellow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+a.bg-bnb-yellow:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Feature Card Entrance Animation */
+.hover-lift {
+    animation: card-entrance 0.6s ease-out backwards;
+}
+
+.hover-lift:nth-child(1) { animation-delay: 0.1s; }
+.hover-lift:nth-child(2) { animation-delay: 0.2s; }
+.hover-lift:nth-child(3) { animation-delay: 0.3s; }
+.hover-lift:nth-child(4) { animation-delay: 0.4s; }
+.hover-lift:nth-child(5) { animation-delay: 0.5s; }
+.hover-lift:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes card-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mobile Responsiveness for Partner Logos */
+@media (max-width: 768px) {
+    .partner-logo {
+        height: 80px;
+        max-width: 150px;
+    }
+
+    .partner-card {
+        padding: 30px 40px;
+    }
+
+    .partner-scroll-track {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .partner-logo {
+        height: 60px;
+        max-width: 120px;
+    }
+
+    .partner-card {
+        padding: 20px 30px;
+    }
+}
