@@ -48,12 +48,34 @@
                     <a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="text-gray-300 hover:text-bnb-yellow transition">GitHub</a>
                 </div>
 
-                <!-- CTA Button -->
+                <!-- CTA Button & Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4">
-                    <a href="#get-started" class="bg-bnb-yellow text-bnb-dark px-6 py-2.5 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                    <a href="#get-started" class="hidden sm:block bg-bnb-yellow text-bnb-dark px-4 sm:px-6 py-2.5 rounded-lg font-semibold text-sm sm:text-base hover:bg-yellow-500 transition whitespace-nowrap">
                         Get Started
                     </a>
+                    <!-- Hamburger Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-bnb-yellow transition p-2" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-bnb-gray bg-bnb-dark/95 backdrop-blur-sm">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#features" class="block text-gray-300 hover:text-bnb-yellow transition py-2">Features</a>
+                <a href="#use-cases" class="block text-gray-300 hover:text-bnb-yellow transition py-2">Use Cases</a>
+                <a href="#developers" class="block text-gray-300 hover:text-bnb-yellow transition py-2">Developers</a>
+                <a href="#networks" class="block text-gray-300 hover:text-bnb-yellow transition py-2">Networks</a>
+                <a href="dashboard.html" class="block text-gray-300 hover:text-bnb-yellow transition py-2">Dashboard</a>
+                <a href="https://github.com/PepayLabs/bnb-pay" target="_blank" class="block text-gray-300 hover:text-bnb-yellow transition py-2">GitHub</a>
+                <a href="#get-started" class="block bg-bnb-yellow text-bnb-dark px-4 py-2.5 rounded-lg font-semibold text-sm text-center hover:bg-yellow-500 transition mt-4">
+                    Get Started
+                </a>
             </div>
         </div>
     </nav>
@@ -786,5 +808,40 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnButton = mobileMenuBtn.contains(event.target);
+
+            if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
